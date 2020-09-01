@@ -8,10 +8,6 @@ class ProductPage(BasePage):
         assert "?promo=" in self.browser.current_url, "URL is not promo"
 
     def add_product_to_basket(self):
-        self.click_add_product()
-        self.solve_quiz_and_get_code()
-
-    def click_add_product(self):
         add_to_basket = self.browser.find_element(*ProductPageLocators.BASKET_FORM)
         add_to_basket.click()
 
@@ -29,3 +25,10 @@ class ProductPage(BasePage):
         basket_price = self.browser.find_element(*ProductPageLocators.BASKET_PRICE).text
         assert product_price in basket_price, "Price is not equal"
 
+    def should_not_be_success_message(self):
+        assert self.is_not_element_present(*ProductPageLocators.SUCCESS_MESSAGE), \
+            "Success message is presented, but should not be"
+
+    def is_disappeared_success_message(self):
+        assert self.is_disappeared(*ProductPageLocators.SUCCESS_MESSAGE), \
+            "Success message is presented, but should not be"
