@@ -1,4 +1,5 @@
 import math
+from .locators import BasePageLocators
 from .locators import MainPageLocators
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
@@ -54,3 +55,7 @@ class BasePage():
     def open_basket(self):
         basket = self.browser.find_element(*MainPageLocators.BASKET)
         basket.click()
+
+    def should_be_authorized_user(self):
+        assert self.is_element_present(*BasePageLocators.USER_ICON), "User icon is not presented," \
+                                                                     " probably unauthorised user"
