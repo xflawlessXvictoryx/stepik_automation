@@ -1,4 +1,5 @@
 import math
+from .locators import MainPageLocators
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import NoSuchElementException, NoAlertPresentException, TimeoutException
@@ -49,3 +50,7 @@ class BasePage():
         except TimeoutException:
             return False
         return True
+
+    def open_basket(self):
+        basket = self.browser.find_element(*MainPageLocators.BASKET)
+        basket.click()
